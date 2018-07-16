@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<tnt:SideNavigation>
+		<tnt:NavigationList>
+			<tnt:items>
+				<tnt:NavigationListItem icon="sap-icon://provision" text="Generate Data" select="navToGenerateData" expanded="false">
+					<tnt:NavigationListItem icon="sap-icon://action-settings" text="Basic Settings" select="chlidItemPress" app:idControl="idGenDataBasicSettingsPanel"/>
+					<tnt:NavigationListItem icon="sap-icon://validate" text="Master Data Maintenance" select="chlidItemPress" app:idControl="idGenDataAdvSettingsPanel"/>
+					<tnt:NavigationListItem icon="sap-icon://provision" text="Status" select="chlidItemPress" app:idControl="idGenDataStatussPanel"/>
+				</tnt:NavigationListItem>
+			</tnt:items>
+		</tnt:NavigationList>
+	</tnt:SideNavigation>
+</core:FragmentDefinition>

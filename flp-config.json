@@ -1,0 +1,34 @@
+{
+    "application": {
+        "id": "",
+        "title": "pinaki.ey.CIO.CIOControlPanel.CIOControlPanel",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#CIOControlPanel-Display",
+        "navigationComponentName": "pinaki.ey.CIO.CIOControlPanel",
+        "intentSemanticObject": "CIOControlPanel",
+        "intentAction": "Display",
+        "html5ApplicationName": "ciocontrolpanel",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "00000000-0000-1111-0000-00000000"
+        ],
+        "contentPackages": [
+            "00000000-0000-2222-0000-00000000"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "CIO Admin",
+        "subtitle": "Admin Settings",
+        "searchKeywords": "CIO Admin,Admin Settings",
+        "displayIconUrl": "sap-icon://settings",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}

@@ -1,0 +1,18 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core"
+	controllerName="pinaki.ey.CIO.CIOControlPanel.controller.Home" displayBlock="true">
+	<App>
+		<pages>
+			<tnt:ToolPage>
+				<!--<tnt:header>-->
+				<!--	<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.toolHeader" type="XML"/>-->
+				<!--</tnt:header>-->
+				<tnt:sideContent>
+					<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.toolPageSideContent" type="XML"/>
+				</tnt:sideContent>
+				<tnt:mainContents>
+					<App id="idToolPageApp"></App>
+				</tnt:mainContents>
+			</tnt:ToolPage >
+		</pages>
+	</App>
+</mvc:View>

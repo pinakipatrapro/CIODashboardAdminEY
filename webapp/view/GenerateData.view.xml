@@ -1,0 +1,18 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core"
+	controllerName="pinaki.ey.CIO.CIOControlPanel.controller.GenerateData" displayBlock="true">
+	<Page title="Generate Data" busyIndicatorDelay="0" floatingFooter="true">
+		<content>
+			<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.generateDataBasicSettings" type="XML"/>
+		 	<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.generateDataAdvancedSettings" type="XML"/>
+			<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.generateDataCurrentStatus" type="XML"/>
+		</content>
+		<footer> 
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button text="Generate Data" type="Emphasized" press="generateData" icon="sap-icon://technical-object" />
+				<Button text="Reset Changes" press="readData"/>
+				<Button text="Open Versions" icon="sap-icon://customer-history"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

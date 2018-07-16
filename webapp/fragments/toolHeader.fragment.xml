@@ -1,0 +1,5 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core">
+	<tnt:ToolHeader>
+		<Image src="https://eig.org/wp-content/uploads/2016/09/ey-logo-white.png" height="2rem"/>
+	</tnt:ToolHeader>
+</core:FragmentDefinition>

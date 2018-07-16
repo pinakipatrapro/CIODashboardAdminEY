@@ -1,0 +1,82 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core" xmlns:ext="pinaki.ey.CIO.CIOControlPanel.extensions">
+	<Panel id="idGenDataAdvSettingsPanel" expanded="true" expandable="true" headerText="Master Data Maintenance">
+		<ext:PanelExtension 
+			title="Cost Center Name(s)"
+			path="/generateData/advancedSettings/costCenter"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="User Name(s)"
+			path="/generateData/advancedSettings/userNames"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="Cost Pool Name(s)"
+			path="/generateData/advancedSettings/costPool"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="Product Name(s)"
+			path="/generateData/advancedSettings/productName"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="Unit of Measure(s)"
+			path="/generateData/advancedSettings/uom"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="Company Name(s)"
+			path="/generateData/advancedSettings/companyName"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="Project Name(s)"
+			path="/generateData/advancedSettings/projectName"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="Project Category(s)"
+			path="/generateData/advancedSettings/projectCategory"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="Project Fund Type(s)"
+			path="/generateData/advancedSettings/projectFundType"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="Project Budget Currency(s)"
+			path="/generateData/advancedSettings/projBudgetCurrency"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="WBS(s)"
+			path="/generateData/advancedSettings/wbs"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="WBS Project Name(s)"
+			path="/generateData/advancedSettings/wbsProjName"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="Expense Type(s)"
+			path="/generateData/advancedSettings/wbsExpenseType"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+	</Panel>
+</core:FragmentDefinition>

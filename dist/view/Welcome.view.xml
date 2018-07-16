@@ -1,0 +1,5 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core"
+	controllerName="pinaki.ey.CIO.CIOControlPanel.controller.Home" displayBlock="true">
+	<MessagePage text="Welcome to CIO settings panel" description="Please select from the options on the left hand side"
+		icon="sap-icon://key-user-settings" showHeader="false"/>
+</mvc:View>

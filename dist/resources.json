@@ -1,0 +1,177 @@
+{
+    "resources": [
+        {
+            "name": "Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "controller/GenerateData-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/GenerateData.controller.js"
+        },
+        {
+            "name": "controller/Home-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Home.controller.js"
+        },
+        {
+            "name": "css/style-dbg.css",
+            "isDebug": true
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "extensions/PanelExtension-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "extensions/PanelExtension.js"
+        },
+        {
+            "name": "extensions/PanelExtensionRenderer-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "extensions/PanelExtensionRenderer.js"
+        },
+        {
+            "name": "fragments/generateDataAdvancedSettings.fragment.xml"
+        },
+        {
+            "name": "fragments/generateDataBasicSettings.fragment.xml"
+        },
+        {
+            "name": "fragments/generateDataCurrentStatus.fragment.xml"
+        },
+        {
+            "name": "fragments/toolHeader.fragment.xml"
+        },
+        {
+            "name": "fragments/toolPageSideContent.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "tmp/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "tmp/Component.js"
+        },
+        {
+            "name": "tmp/controller/GenerateData.controller.js"
+        },
+        {
+            "name": "tmp/controller/Home.controller.js"
+        },
+        {
+            "name": "tmp/css/style.css"
+        },
+        {
+            "name": "tmp/extensions/PanelExtension.js"
+        },
+        {
+            "name": "tmp/extensions/PanelExtensionRenderer.js"
+        },
+        {
+            "name": "tmp/fragments/generateDataAdvancedSettings.fragment.xml"
+        },
+        {
+            "name": "tmp/fragments/generateDataBasicSettings.fragment.xml"
+        },
+        {
+            "name": "tmp/fragments/generateDataCurrentStatus.fragment.xml"
+        },
+        {
+            "name": "tmp/fragments/toolHeader.fragment.xml"
+        },
+        {
+            "name": "tmp/fragments/toolPageSideContent.fragment.xml"
+        },
+        {
+            "name": "tmp/i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "tmp/index.html"
+        },
+        {
+            "name": "tmp/manifest.json"
+        },
+        {
+            "name": "tmp/model/models.js"
+        },
+        {
+            "name": "tmp/view/GenerateData.view.xml"
+        },
+        {
+            "name": "tmp/view/Home.view.xml"
+        },
+        {
+            "name": "tmp/view/Welcome.view.xml"
+        },
+        {
+            "name": "tmp-dbg/Component.js"
+        },
+        {
+            "name": "tmp-dbg/controller/GenerateData.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/Home.controller.js"
+        },
+        {
+            "name": "tmp-dbg/css/style.css"
+        },
+        {
+            "name": "tmp-dbg/extensions/PanelExtension.js"
+        },
+        {
+            "name": "tmp-dbg/extensions/PanelExtensionRenderer.js"
+        },
+        {
+            "name": "tmp-dbg/model/models.js"
+        },
+        {
+            "name": "view/GenerateData.view.xml"
+        },
+        {
+            "name": "view/Home.view.xml"
+        },
+        {
+            "name": "view/Welcome.view.xml"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core">
+	<Panel id="idGenDataStatussPanel" expanded="true" expandable="true" headerText="Current Status">
+		<List items="{path:'/status'}">
+			<headerToolbar>
+				<OverflowToolbar>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://refresh" text="Refresh" press="readStatus"/>
+				</OverflowToolbar>
+			</headerToolbar>
+			<DisplayListItem label="Table Name : {tableName}" value="Number of records : {count}"/>
+		</List>
+	</Panel>
+</core:FragmentDefinition>
