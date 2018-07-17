@@ -9,9 +9,9 @@
 		<footer> 
 			<OverflowToolbar>
 				<ToolbarSpacer/>
-				<Button text="Generate Data" type="Emphasized" press="generateData" icon="sap-icon://technical-object" />
+				<Button text="Generate Data" type="Emphasized" press="generateDataPrompt" icon="sap-icon://technical-object" />
 				<Button text="Reset Changes" press="readData"/>
-				<Button text="Open Versions" icon="sap-icon://customer-history"/>
+				<Button text="Open Versions" icon="sap-icon://customer-history" press="openVersionSelector"/>
 			</OverflowToolbar>
 		</footer>
 	</Page>
