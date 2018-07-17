@@ -129,10 +129,7 @@ sap.ui.define([
 			var hash = (oCrossAppNavigator && oCrossAppNavigator.hrefForExternal({
 				target: {
 					semanticObject: "cioadmin",
-					action: "Display"
-				},
-				params: {
-					"tableName": tableName
+					action: "Display&/tableViewer/"+btoa(tableName)
 				}
 			})) || ""; // generate the Hash to display a Supplier
 			oCrossAppNavigator.toExternal({
