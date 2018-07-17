@@ -44,7 +44,9 @@ sap.ui.define([
 				data: JSON.stringify(data).replace(/%/g, 'X*PERC*X'),
 				success: function (response) {
 					that.getView().setBusy(false);
-					that.getView().getModel().setData({generationResult : JSON.parse(response)},true);
+					that.getView().getModel().setData({
+						generationResult: JSON.parse(response)
+					}, true);
 					that.openSuccessDialog(that.getView().getModel());
 				},
 				error: function (error, response) {
@@ -92,34 +94,53 @@ sap.ui.define([
 				}
 			});
 		},
-		openSuccessDialog:function(model){
+		openSuccessDialog: function (model) {
 			var oDialog = new sap.m.Dialog({
-				afterClose : function(){
-					this.destroy();	
+				afterClose: function () {
+					this.destroy();
 				},
-				title : "{/generationResult/text}",
-				content : [
+				title: "{/generationResult/text}",
+				content: [
 					new sap.m.List({
-						items : {
-							path : "/generationResult/messages",
-							template : new sap.m.StandardListItem({
-								title : "{text}",
-								icon : "sap-icon://accept"
+						items: {
+							path: "/generationResult/messages",
+							template: new sap.m.StandardListItem({
+								title: "{text}",
+								icon: "sap-icon://accept"
 							})
 						}
-					})	
+					})
 				],
-				buttons : [
+				buttons: [
 					new sap.m.Button({
-						text : "Ok",
-						press : function(oEvent){
+						text: "Ok",
+						press: function (oEvent) {
 							oEvent.getSource().getParent().close();
 						}
-					})	
+					})
 				]
 			});
 			oDialog.setModel(model);
 			oDialog.open();
+		},
+		navToDisplayTable: function (oEvent) {
+			var tableName = oEvent.getSource().getBindingContext().getProperty("tableName");
+			var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
+			var hash = (oCrossAppNavigator && oCrossAppNavigator.hrefForExternal({
+				target: {
+					semanticObject: "cioadmin",
+					action: "Display"
+				},
+				params: {
+					"tableName": tableName
+				}
+			})) || ""; // generate the Hash to display a Supplier
+			oCrossAppNavigator.toExternal({
+				target: {
+					shellHash: hash
+				}
+			}); // navigate to Supplier application
+
 		}
 	});
 });
