@@ -3,7 +3,7 @@
 	<Page title="Generate Data" busyIndicatorDelay="0" floatingFooter="true">
 		<content>
 			<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.generateDataBasicSettings" type="XML"/>
-			<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.generateDataAdvancedSettings" type="XML"/>
+		 	<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.generateDataAdvancedSettings" type="XML"/>
 			<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.generateDataCurrentStatus" type="XML"/>
 		</content>
 		<footer> 
