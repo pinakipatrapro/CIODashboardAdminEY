@@ -3,15 +3,16 @@
 	<Page title="Generate Data" busyIndicatorDelay="0" floatingFooter="true">
 		<content>
 			<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.generateDataBasicSettings" type="XML"/>
-		 	<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.generateDataAdvancedSettings" type="XML"/>
+			<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.generateDataAdvancedSettings" type="XML"/>
+			<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.generateDataWeightage" type="XML"/>
 			<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.generateDataCurrentStatus" type="XML"/>
 		</content>
-		<footer> 
+		<footer>
 			<OverflowToolbar>
 				<ToolbarSpacer/>
-				<Button text="Generate Data" type="Emphasized" press="generateData" icon="sap-icon://technical-object" />
+				<Button text="Generate Data" type="Emphasized" press="generateDataPrompt" icon="sap-icon://technical-object"/>
 				<Button text="Reset Changes" press="readData"/>
-				<Button text="Open Versions" icon="sap-icon://customer-history"/>
+				<Button text="Open Versions" icon="sap-icon://customer-history" press="openVersionSelector"/>
 			</OverflowToolbar>
 		</footer>
 	</Page>

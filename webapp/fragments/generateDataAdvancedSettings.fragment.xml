@@ -5,6 +5,7 @@
 			path="/generateData/advancedSettings/costCenter"
 			modelProperty="name"
 			expanded="false" expandable="true"
+			visible="false"
 		></ext:PanelExtension>
 		<ext:PanelExtension 
 			title="User Name(s)"

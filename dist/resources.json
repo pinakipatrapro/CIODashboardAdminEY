@@ -59,6 +59,9 @@
             "name": "fragments/generateDataCurrentStatus.fragment.xml"
         },
         {
+            "name": "fragments/generateDataWeightage.fragment.xml"
+        },
+        {
             "name": "fragments/toolHeader.fragment.xml"
         },
         {
@@ -114,6 +117,9 @@
         },
         {
             "name": "tmp/fragments/generateDataCurrentStatus.fragment.xml"
+        },
+        {
+            "name": "tmp/fragments/generateDataWeightage.fragment.xml"
         },
         {
             "name": "tmp/fragments/toolHeader.fragment.xml"

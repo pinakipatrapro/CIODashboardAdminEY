@@ -1,6 +1,7 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"sap/ui/core/mvc/Controller",
+	"sap/ui/table/Column"
+], function (Controller, tableColumn) {
 	"use strict";
 
 	return Controller.extend("pinaki.ey.CIO.CIOControlPanel.controller.GenerateData", {
@@ -8,6 +9,7 @@ sap.ui.define([
 			this.setModelData();
 			this.readData();
 			this.readStatus();
+			this.fetchWeightageData();
 		},
 		setModelData: function () {
 			var oModel = this.getView().getModel();
@@ -31,6 +33,11 @@ sap.ui.define([
 						wbs: [],
 						wbsProjName: [],
 						wbsExpenseType: []
+					},
+					weightage: {
+						costCentVglAcc: [],
+						dataOFPK: [],
+						costCentVglAccRes: []
 					}
 				},
 				status: {}
@@ -51,7 +58,7 @@ sap.ui.define([
 								value: "{/generateData/datasetDescription}",
 								cols: 60,
 								rows: 4
-							})
+							}),
 						]
 					})
 				],
@@ -79,6 +86,7 @@ sap.ui.define([
 			var that = this;
 			var data = that.getView().getModel().getData().generateData;
 			that.getView().setBusy(true);
+			this.applyWeightage();
 			$.ajax({
 				url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/generateData.xsjs?mode=generateWithInput",
 				method: "POST",
@@ -183,6 +191,9 @@ sap.ui.define([
 			var that = this;
 			var oSelectDialog = new sap.m.SelectDialog({
 				title: "Select available versions",
+				// search : function(){
+				// 	oEvent	
+				// },
 				confirm: function (oEvent) {
 					var id = oEvent.getParameter('selectedItem').getBindingContext().getProperty("ID");
 					that.loadSavedDataset(id);
@@ -204,7 +215,7 @@ sap.ui.define([
 			var that = this;
 			that.getView().setBusy(true);
 			$.ajax({
-				url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/getLogFromId.xsjs?id="+id,
+				url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/getLogFromId.xsjs?id=" + id,
 				cache: false,
 				success: function (data) {
 					var responseData = JSON.parse(data);
@@ -212,6 +223,164 @@ sap.ui.define([
 					that.getView().setBusy(false);
 				}
 			});
+		},
+		fetchWeightageData: function () {
+			var that = this;
+			that.getView().setBusy(true);
+			$.ajax({
+				url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/weightageDataRead.xsjs",
+				cache: false,
+				success: function (data) {
+					that.getView().getModel().setProperty("/generateData/weightage/dataOFPK", data);
+					that.getView().setBusy(false);
+					that.generateWeightageAllocTable(data);
+				}
+			});
+		},
+		generateWeightageAllocTable: function (data) {
+			var costCenteres = data.distinctCC;
+			var glAccounts = data.distinctGlAcc;
+			var aMappings = [];
+			for (var i = 0; i < costCenteres.length; i++) {
+				var currObj = {
+					"Cost Center": costCenteres[i].CostCenterName
+				};
+				for (var j = 0; j < glAccounts.length; j++) {
+					currObj[glAccounts[j].GLAccountName] = {
+						value: 100 / glAccounts.length,
+						state: "None",
+						stateText: ""
+					};
+				}
+				currObj["Sum"] = 100;
+				aMappings.push(currObj);
+			}
+			var masterColumn = ["Cost Center", "Sum"];
+			var masterColumnWidth = ["20rem", "4rem"];
+			this.getView().getModel().setProperty('/generateData/weightage/costCentVglAcc', aMappings);
+			var objKeys = [];
+			for (var k in aMappings[0]) objKeys.push(k);
+			this.createTableColumns(objKeys, masterColumn, masterColumnWidth);
+		},
+		createTableColumns: function (objKeys, masterColumn, masterColumnWidth) {
+			var that = this;
+			var table = this.getView().byId('idWeitageCostCvCostAcc');
+			table.removeAllColumns();
+			objKeys.forEach(function (e) {
+				if (masterColumn.indexOf(e) > -1) {
+					var input = new sap.m.Label({
+						text: "{" + e + "}",
+						design: "Bold"
+					});
+					var column = new tableColumn({
+						label: new sap.m.Label({
+							text: e,
+							design: "Bold"
+						}),
+						width: masterColumnWidth[masterColumn.indexOf(e)],
+						template: input
+					});
+				} else {
+					input = new sap.m.Input({
+						value: "{" + e + "/value}",
+						valueState: "{" + e + "/state}",
+						valueStateText: "{" + e + "/stateText}",
+						change: function () {
+							setTimeout(function () {
+								that.validateWeightage();
+							}, 500);
+						}
+					});
+					column = new tableColumn({
+						label: new sap.m.Label({
+							text: e,
+							design: "Bold"
+						}),
+						template: input
+					});
+				}
+				table.addColumn(column);
+			});
+		},
+		validateWeightage: function () {
+			//Validate Data
+			var isValid = 'X';
+			var oModel = this.getView().getModel();
+			var oWeightage = oModel.getData().generateData.weightage.costCentVglAcc;
+			for (var i = 0; i < oWeightage.length; i++) {
+				var total = 0;
+				for (var key in oWeightage[i]) {
+					if (oWeightage[i][key].value) {
+						oModel.setProperty("/generateData/weightage/costCentVglAcc/" + i + "/" + key + "/state", "None");
+						var value = parseFloat(oWeightage[i][key].value);
+						total = total + value;
+						oModel.setProperty("/generateData/weightage/costCentVglAcc/" + i + "/" + "Sum", total);
+						if (isNaN(total)) {
+							isValid = "E";
+							sap.m.MessageToast.show("Please enter valid numeric entries");
+							oModel.setProperty("/generateData/weightage/costCentVglAcc/" + i + "/" + key + "/state", "Error");
+							oModel.setProperty("/generateData/weightage/costCentVglAcc/" + i + "/" + key + "/state", "Not a valid Number");
+							break;
+						} else if (total > 100) {
+							isValid = "E";
+							sap.m.MessageToast.show("Sum of weightage does not equals 100");
+							oModel.setProperty("/generateData/weightage/costCentVglAcc/" + i + "/" + key + "/state", "Error");
+							oModel.setProperty("/generateData/weightage/costCentVglAcc/" + i + "/" + key + "/stateText", "Sum of weightage exceeds 100");
+							break;
+						}
+					}
+				}
+				if (total !== 100 && isValid == 'X') {
+					sap.m.MessageToast.show("Sum of weightage does not equals 100");
+					oModel.setProperty("/generateData/weightage/costCentVglAcc/" + i + "/" + "Sum", total);
+				}
+			};
+			return isValid;
+		},
+		applyWeightage: function () {
+			var isValid = this.validateWeightage();
+			if (isValid == 'E') {
+				alert('Error');
+				return;
+			}
+			var oModel = this.getView().getModel();
+			var weightage = oModel.getData().generateData.weightage.costCentVglAcc;
+			var ccID = oModel.getData().generateData.weightage.dataOFPK.distinctCC;
+			var glID = oModel.getData().generateData.weightage.dataOFPK.distinctGlAcc;
+			var glId;
+			var aCondition = [];
+			for (var i = 0; i < weightage.length; i++) {
+				var costCenter = weightage[i]["Cost Center"] = weightage[i]["Cost Center"];
+				Object.keys(weightage[i]).forEach(function (key, index) {
+					if (typeof (weightage[i][key]) === "object") {
+						ccID.forEach(function (e) {
+							if (e.CostCenterName === costCenter) {
+								costCenter = e.CostCenterID;
+							}
+						});
+						glID.forEach(function (e) {
+							if (e.GLAccountName === key) {
+								glId = e.GLAccountNumber;
+							}
+						});
+						aCondition.push({
+							costCenter: costCenter,
+							glAcc: glId,
+							value: weightage[i][key].value
+						});
+					}
+				});
+			}
+			oModel.setProperty("/generateData/weightage/costCentVglAccRes", aCondition);
+			// $.ajax({
+			// 	type: "POST",
+			// 	url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/allocateWeightage.xsjs",
+			// 	dataType: "json",
+			// 	success: function (msg) {
+					
+			// 	},
+			// 	data: JSON.stringify(aCondition)
+			// });
 		}
 	});
 });
