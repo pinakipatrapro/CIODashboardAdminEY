@@ -8,6 +8,10 @@ sap.ui.define([
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("GenerateData");
 		},
+		navToDataUpload: function (oEvent) {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("DataUpload");
+		},
 		chlidItemPress: function (oEvent) {
 			var source = oEvent.getSource();
 			source.getParent().fireEvent('select');

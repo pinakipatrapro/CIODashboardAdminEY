@@ -1,3 +1,24 @@
 .smallerFont > * {
-    font-size : .6rem;
+    font-size: .6rem;
+}
+
+
+.sapMInputBaseInner {
+    color: #000000 ! important;
+    background: #ffffff00 ! important;
+    border: 0px solid #bfbfbf36 ! important;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    font-size: 0.65rem ! important;
+}
+
+.sapUiSizeCompact .sapUiTableCell .sapMLabel, .sapUiSizeCondensed .sapUiTableCell .sapMLabel, .sapUiSizeCompact .sapUiTableColCell>.sapMLabel, .sapUiSizeCondensed .sapUiTableColCell>.sapMLabel {
+    font-weight: normal;
+    font-size: 0.6rem;
+    font-weight: bold;
+}
+
+
+.sapMNCValue {
+    font-size: 1rem;
 }

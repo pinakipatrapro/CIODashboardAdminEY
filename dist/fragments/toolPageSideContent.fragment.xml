@@ -9,6 +9,9 @@
 					<tnt:NavigationListItem icon="sap-icon://measure" text="Assign Weitage" select="chlidItemPress" app:idControl="idGenDataWeightageAlloc"/>
 					<tnt:NavigationListItem icon="sap-icon://provision" text="Status" select="chlidItemPress" app:idControl="idGenDataStatussPanel"/>
 				</tnt:NavigationListItem>
+				<tnt:NavigationListItem icon="sap-icon://provision" text="Upload Data" select="navToDataUpload" expanded="true">
+					<tnt:NavigationListItem icon="sap-icon://upload-to-cloud" text="Upload Excel Data" select="chlidItemPress" app:idControl="idUploadExcelData"/>
+				</tnt:NavigationListItem>
 			</tnt:items>
 		</tnt:NavigationList>
 	</tnt:SideNavigation>

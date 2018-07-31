@@ -12,6 +12,27 @@
             "name": "Component.js"
         },
         {
+            "name": "api/JSONToTable-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "api/JSONToTable.js"
+        },
+        {
+            "name": "api/xlsxfullmin-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "api/xlsxfullmin.js"
+        },
+        {
+            "name": "controller/DataUpload-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/DataUpload.controller.js"
+        },
+        {
             "name": "controller/GenerateData-dbg.controller.js",
             "isDebug": true
         },
@@ -68,6 +89,9 @@
             "name": "fragments/toolPageSideContent.fragment.xml"
         },
         {
+            "name": "fragments/uploadExcelData.fragment.xml"
+        },
+        {
             "name": "i18n/i18n.properties",
             "raw": "i18n/i18n.properties"
         },
@@ -93,6 +117,15 @@
         },
         {
             "name": "tmp/Component.js"
+        },
+        {
+            "name": "tmp/api/JSONToTable.js"
+        },
+        {
+            "name": "tmp/api/xlsxfullmin.js"
+        },
+        {
+            "name": "tmp/controller/DataUpload.controller.js"
         },
         {
             "name": "tmp/controller/GenerateData.controller.js"
@@ -128,6 +161,9 @@
             "name": "tmp/fragments/toolPageSideContent.fragment.xml"
         },
         {
+            "name": "tmp/fragments/uploadExcelData.fragment.xml"
+        },
+        {
             "name": "tmp/i18n/i18n.properties",
             "raw": "i18n/i18n.properties"
         },
@@ -141,6 +177,12 @@
             "name": "tmp/model/models.js"
         },
         {
+            "name": "tmp/util/Constants.js"
+        },
+        {
+            "name": "tmp/view/DataUpload.view.xml"
+        },
+        {
             "name": "tmp/view/GenerateData.view.xml"
         },
         {
@@ -151,6 +193,15 @@
         },
         {
             "name": "tmp-dbg/Component.js"
+        },
+        {
+            "name": "tmp-dbg/api/JSONToTable.js"
+        },
+        {
+            "name": "tmp-dbg/api/xlsxfullmin.js"
+        },
+        {
+            "name": "tmp-dbg/controller/DataUpload.controller.js"
         },
         {
             "name": "tmp-dbg/controller/GenerateData.controller.js"
@@ -169,6 +220,19 @@
         },
         {
             "name": "tmp-dbg/model/models.js"
+        },
+        {
+            "name": "tmp-dbg/util/Constants.js"
+        },
+        {
+            "name": "util/Constants-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "util/Constants.js"
+        },
+        {
+            "name": "view/DataUpload.view.xml"
         },
         {
             "name": "view/GenerateData.view.xml"
