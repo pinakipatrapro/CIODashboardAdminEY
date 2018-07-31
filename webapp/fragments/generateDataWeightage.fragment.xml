@@ -8,6 +8,7 @@
 					<ToolbarSpacer/>
 					<Button icon="sap-icon://refresh" type="Transparent" press="fetchWeightageData"/>
 					<Button icon="sap-icon://restart" text="Apply Distribution" press="applyWeightage" type="Transparent" visible="false"/>
+					<Button icon="sap-icon://decrease-line-height" text="Apply distribution pattern" press="applyPatternToWeightage" type="Transparent" />
 				</OverflowToolbar>
 			</table:title> 
 		</table:Table>

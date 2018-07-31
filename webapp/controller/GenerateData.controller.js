@@ -191,21 +191,30 @@ sap.ui.define([
 			var that = this;
 			var oSelectDialog = new sap.m.SelectDialog({
 				title: "Select available versions",
-				// search : function(){
-				// 	oEvent	
-				// },
+				search: function (oEvent) {
+					oEvent.getSource().getBinding('items').filter(new sap.ui.model.Filter({
+						path: "NAME_LOWER",
+						operator: "Contains",
+						value1: oEvent.getParameter('value')
+					}));
+				},
 				confirm: function (oEvent) {
 					var id = oEvent.getParameter('selectedItem').getBindingContext().getProperty("ID");
 					that.loadSavedDataset(id);
 				},
 				items: {
-					path: "/DataGenLog?$orderby=ID",
+					path: "/DataGenLog",
 					template: new sap.m.FeedListItem({
 						text: "{DESCRIPTION}",
+						showIcon: false,
 						timestamp: "{TIMESTAMP}",
 						sender: "{NAME}",
 						info: "Data Size : {DATA_LENGTH} (Chars)"
-					})
+					}),
+					sorter: {
+						path: 'ID',
+						desc: true
+					}
 				}
 			});
 			oSelectDialog.setModel(this.getView().getModel('viewModel'));
@@ -245,12 +254,22 @@ sap.ui.define([
 				var currObj = {
 					"Cost Center": costCenteres[i].CostCenterName
 				};
+				var totalCount = 0;
 				for (var j = 0; j < glAccounts.length; j++) {
-					currObj[glAccounts[j].GLAccountName] = {
-						value: 100 / glAccounts.length,
-						state: "None",
-						stateText: ""
-					};
+					if (j === glAccounts.length - 1) {
+						currObj[glAccounts[j].GLAccountName] = {
+							value: 100 - totalCount,
+							state: "None",
+							stateText: ""
+						};
+					} else {
+						currObj[glAccounts[j].GLAccountName] = {
+							value: parseInt(100 / glAccounts.length, 0),
+							state: "None",
+							stateText: ""
+						};
+						totalCount = totalCount + parseInt(100 / glAccounts.length, 0);
+					}
 				}
 				currObj["Sum"] = 100;
 				aMappings.push(currObj);
@@ -296,6 +315,7 @@ sap.ui.define([
 							text: e,
 							design: "Bold"
 						}),
+						width : '6rem',
 						template: input
 					});
 				}
@@ -377,10 +397,54 @@ sap.ui.define([
 			// 	url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/allocateWeightage.xsjs",
 			// 	dataType: "json",
 			// 	success: function (msg) {
-					
+
 			// 	},
 			// 	data: JSON.stringify(aCondition)
 			// });
+		},
+		applyPatternToWeightage: function () {
+			var that = this;
+			var oDialog = new sap.m.Dialog({
+				onAfterClose: function (oEvent) {
+					oEvent.getSource().getParent().close();
+				},
+				title: 'Apply distribution pattern',
+				content: [
+					new sap.m.TextArea({
+						cols: 40,
+						placeholder: 'Enter coma seperated values for a single row'
+					})
+				],
+				buttons: [
+					new sap.m.Button({
+						text: "Ok",
+						press: function (oEvent) {
+							var aValues = oEvent.getSource().getParent().getContent()[0].getValue().split(',');
+							var loopCounter = 0;
+							var currData = that.getView().getModel().getProperty('/generateData/weightage/costCentVglAcc');
+							for (var i = 0; i < currData.length; i++) {
+								Object.keys(currData[i]).forEach(function (key, index) {
+									if (currData[i][key].value) {
+										currData[i][key].value = aValues[loopCounter];
+										loopCounter++;
+									}
+								});
+								loopCounter = 0;
+							};
+							that.getView().getModel().setProperty('/generateData/weightage/costCentVglAcc', currData);
+							that.validateWeightage();
+							oEvent.getSource().getParent().close();
+						}
+					}),
+					new sap.m.Button({
+						text: "Cancel",
+						press: function (oEvent) {
+							oEvent.getSource().getParent().close();
+						}
+					})
+				]
+			});
+			oDialog.open();
 		}
 	});
 });
