@@ -4,5 +4,11 @@
 		<content>
 			<core:Fragment fragmentName="pinaki.ey.CIO.CIOControlPanel.fragments.uploadExcelData" type="XML"/>
 		</content>
+		<footer>
+			<OverflowToolbar >
+				<ToolbarSpacer/>
+				<Button text="Continue to data mapping" icon="sap-icon://overview-chart" press="navToDataUploadMapping"/>
+			</OverflowToolbar>
+		</footer>
 	</Page>
 </mvc:View>

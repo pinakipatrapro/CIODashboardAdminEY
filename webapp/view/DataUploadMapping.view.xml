@@ -1,0 +1,25 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core" 	xmlns:dnd="sap.ui.core.dnd"
+	xmlns:l="sap.ui.layout" controllerName="pinaki.ey.CIO.CIOControlPanel.controller.DataUploadMapping" displayBlock="true">
+	<Page title="Map Uploaded Data " busyIndicatorDelay="0" floatingFooter="true">
+		<content>
+			<Panel headerText="Manage Mappings" expandable="true" expanded="true">
+				<l:Splitter>
+					<List headerText="Table Columns" id="idTableColumnList">
+						<dragDropConfig>
+							<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" targetElement="idUploadedDataColumns" dropPosition="On" drop="onDroppedMapping"/>
+						</dragDropConfig>
+					</List>
+					<List headerText="Mappings" id="idTableMappingList" mode="Delete" showNoData="false" delete="onMappingsDeleted" >
+						<layoutData><l:SplitterLayoutData size="50%" minSize="200px" /></layoutData>
+					</List>
+					<List headerText="Uploaded Data Columns" id="idUploadedDataColumns"></List>
+				</l:Splitter>
+			</Panel>
+		</content>
+		<footer>
+			<OverflowToolbar >
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

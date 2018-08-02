@@ -19,6 +19,13 @@
             "name": "api/JSONToTable.js"
         },
         {
+            "name": "api/RawDataValidator-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "api/RawDataValidator.js"
+        },
+        {
             "name": "api/xlsxfullmin-dbg.js",
             "isDebug": true
         },
@@ -31,6 +38,13 @@
         },
         {
             "name": "controller/DataUpload.controller.js"
+        },
+        {
+            "name": "controller/DataUploadMapping-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/DataUploadMapping.controller.js"
         },
         {
             "name": "controller/GenerateData-dbg.controller.js",
@@ -122,10 +136,16 @@
             "name": "tmp/api/JSONToTable.js"
         },
         {
+            "name": "tmp/api/RawDataValidator.js"
+        },
+        {
             "name": "tmp/api/xlsxfullmin.js"
         },
         {
             "name": "tmp/controller/DataUpload.controller.js"
+        },
+        {
+            "name": "tmp/controller/DataUploadMapping.controller.js"
         },
         {
             "name": "tmp/controller/GenerateData.controller.js"
@@ -183,6 +203,9 @@
             "name": "tmp/view/DataUpload.view.xml"
         },
         {
+            "name": "tmp/view/DataUploadMapping.view.xml"
+        },
+        {
             "name": "tmp/view/GenerateData.view.xml"
         },
         {
@@ -198,10 +221,16 @@
             "name": "tmp-dbg/api/JSONToTable.js"
         },
         {
+            "name": "tmp-dbg/api/RawDataValidator.js"
+        },
+        {
             "name": "tmp-dbg/api/xlsxfullmin.js"
         },
         {
             "name": "tmp-dbg/controller/DataUpload.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/DataUploadMapping.controller.js"
         },
         {
             "name": "tmp-dbg/controller/GenerateData.controller.js"
@@ -233,6 +262,9 @@
         },
         {
             "name": "view/DataUpload.view.xml"
+        },
+        {
+            "name": "view/DataUploadMapping.view.xml"
         },
         {
             "name": "view/GenerateData.view.xml"

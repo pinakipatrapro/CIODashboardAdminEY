@@ -3,10 +3,10 @@ sap.ui.define([], function () {
 	return {
 		tableList: [{
 			name: "Cost Center",
-			tableName: ""
+			tableName: '"PINAKIP"."analyticscloud.db.CIO::CostCenter"'
 		}, {
 			name: "Cost Pool",
-			tableName: ""
+			tableName: '"PINAKIP"."analyticscloud.db.CIO::CostPool"'
 		}]
 	};
 

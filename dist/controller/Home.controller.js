@@ -28,6 +28,10 @@ sap.ui.define([
 			}.bind(this);
 			attachedAfterNavigate();
 			app.attachAfterNavigate(attachedAfterNavigate);
+		},
+		toggleSidebar : function(oEvent){
+			var toolPage = oEvent.getSource().getParent().getParent().getParent();
+			toolPage.setSideExpanded(! toolPage.getSideExpanded());
 		}
 	});
 });
