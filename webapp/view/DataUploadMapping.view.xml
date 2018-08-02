@@ -15,6 +15,9 @@
 					<List headerText="Uploaded Data Columns" id="idUploadedDataColumns"></List>
 				</l:Splitter>
 			</Panel>
+			<Panel id='idDataPreviewTable' headerText="Data Preview" expandable="true" expanded="true">
+				
+			</Panel>
 		</content>
 		<footer>
 			<OverflowToolbar >
