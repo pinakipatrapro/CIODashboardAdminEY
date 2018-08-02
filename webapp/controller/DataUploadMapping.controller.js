@@ -2,7 +2,8 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	'sap/m/MessageBox',
 	"pinaki/ey/CIO/CIOControlPanel/api/JSONToTable",
-], function (Controller, MessageBox, JSONToTable) {
+	"pinaki/ey/CIO/CIOControlPanel/api/MappingValidator"
+], function (Controller, MessageBox, JSONToTable,MappingValidator) {
 	"use strict";
 	return Controller.extend("pinaki.ey.CIO.CIOControlPanel.controller.DataUploadMapping", {
 		onInit: function () {
@@ -94,10 +95,9 @@ sap.ui.define([
 			var customListItem = new sap.m.CustomListItem({
 				content: [
 					new sap.ui.core.Icon({
-						src: "sap-icon://validate",
-					}).addStyleClass('sapUiTinyMarginBeginEnd'),
-					new sap.ui.core.Icon({
 						src: "sap-icon://syntax",
+						color : '#1de202',
+						press : [this.openTransformationDialog,this]
 					}).addStyleClass('sapUiTinyMarginBeginEnd'),
 					new sap.m.Label({
 						text: '{from}'
@@ -134,6 +134,7 @@ sap.ui.define([
 				toControl: droppedControl
 			});
 			this.getView().getModel().setProperty('/mappedColumns', aExistingMappings);
+			this.onMappingUpdate();
 		},
 		onMappingsDeleted: function (oEvent) {
 			oEvent.getParameter('listItem').getBindingContext().getProperty('toControl').setVisible(true);
@@ -148,6 +149,7 @@ sap.ui.define([
 			}
 			aExistingMappings.splice(index, 1);
 			this.getView().getModel().setProperty('/mappedColumns', aExistingMappings);
+			this.onMappingUpdate();
 		},
 		createInitialPreviewTable: function (columns) {
 			var previewTable = [];
@@ -161,6 +163,61 @@ sap.ui.define([
 			}
 			var oTable = new JSONToTable('idMappedDataPreview', previewTable);
 			this.getView().byId('idDataPreviewTable').addContent(oTable.getTable());
+			this.getView().getModel().setProperty('/mappingsPreviewTable', previewTable);
+		},
+		onMappingUpdate: function () {
+
+			var mappings = this.getView().getModel().getProperty('/mappedColumns');
+			var sourceData = this.getView().getModel().getProperty('/UploadedData/currentSheetData');
+			var aPreviewTableData = this.getView().getModel().getProperty('/mappingsPreviewTable');
+			var oPreviewTableData = aPreviewTableData[0];
+			Object.keys(oPreviewTableData).forEach(v => oPreviewTableData[v] = '') 
+			var oPreviewTableDataCopy = oPreviewTableData;
+			aPreviewTableData = [];
+
+			sourceData.forEach(function (e) {
+				oPreviewTableDataCopy = $.extend({}, oPreviewTableData);
+				for (var i = 0; i < mappings.length; i++) {
+					oPreviewTableDataCopy[mappings[i].from] = e[mappings[i].to];
+				}
+				aPreviewTableData.push(oPreviewTableDataCopy);
+			});
+			if (mappings.length < 0) {
+				this.createInitialPreviewTable(this.getView().getModel().getProperty('/dbColumns'))
+			} else {
+				if (sap.ui.getCore().byId('idMappedDataPreview') !== undefined) {
+					sap.ui.getCore().byId('idMappedDataPreview').destroy();
+				}
+				var oTable = new JSONToTable('idMappedDataPreview', aPreviewTableData);
+				this.getView().byId('idDataPreviewTable').addContent(oTable.getTable());
+			}
+			this.getView().getModel().setProperty('/mappingsPreviewTable', aPreviewTableData);
+		},
+		validateMappings : function(){
+			var columns = this.getView().getModel().getProperty('/dbColumns');
+			var mappingData = this.getView().getModel().getProperty('/mappingsPreviewTable')
+			var validator = new MappingValidator(mappingData,columns);
+			validator.validateData();
+		},
+		openTransformationDialog : function(){
+			var dialog = new sap.m.Dialog({
+				title : 'Create transformation logic',
+				content : [
+					new sap.m.TextArea({
+						cols : 100,
+						rows : 20
+					})
+				],
+				buttons : [
+					new sap.m.Button({
+						text : 'Ok',
+						press : function(oEvent){
+							oEvent.getSource().getParent().close();
+						}
+					})
+					]
+			});
+			var messages = dialog.open();
 		}
 
 	});

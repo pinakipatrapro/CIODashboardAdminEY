@@ -7,6 +7,10 @@ sap.ui.define([], function () {
 		}, {
 			name: "Cost Pool",
 			tableName: '"PINAKIP"."analyticscloud.db.CIO::CostPool"'
+		},
+		{
+			name : "Purchase Orders",
+			tableName : '"PINAKIP"."analyticscloud.db.CIO::PurchaseOrders"'
 		}]
 	};
 
