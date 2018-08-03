@@ -82,7 +82,7 @@ sap.ui.define([
 			if (sap.ui.getCore().byId('idUploadDataPreview') !== undefined) {
 				sap.ui.getCore().byId('idUploadDataPreview').destroy();
 			}
-			var oTable = new JSONToTable('idUploadDataPreview', this.getView().getModel('idUploadDataModel').getProperty('/currentSheetData'));
+			var oTable = new JSONToTable('idUploadDataPreview', this.getView().getModel('idUploadDataModel').getProperty('/currentSheetData'),true);
 			this.getView().byId('idUploadExcelData').addContent(oTable.getTable());
 		},
 		navToDataUploadMapping: function (oEvent) {

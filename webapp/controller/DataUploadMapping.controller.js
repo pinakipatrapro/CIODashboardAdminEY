@@ -104,7 +104,7 @@ sap.ui.define([
 						press: [this.openTransformationDialog, this]
 					}).addStyleClass('sapUiTinyMarginBeginEnd'),
 					new sap.m.Label({
-						text: '{from}'
+						text: '{from} ({datatype})'
 					}).addStyleClass('sapUiTinyMarginBeginEnd'),
 					new sap.ui.core.Icon({
 						src: 'sap-icon://arrow-right'
@@ -124,6 +124,7 @@ sap.ui.define([
 			droppedControl.setVisible(false);
 
 			var draged = draggedControl.getProperty('title');
+			var fromDatatype =draggedControl.getProperty('info')
 			var dropped = droppedControl.getProperty('title');
 
 			var aExistingMappings = [];
@@ -134,6 +135,7 @@ sap.ui.define([
 			aExistingMappings.push({
 				from: draged,
 				to: dropped,
+				datatype : fromDatatype,
 				fromControl: draggedControl,
 				toControl: droppedControl
 			});
@@ -165,7 +167,7 @@ sap.ui.define([
 			if (sap.ui.getCore().byId('idMappedDataPreview') !== undefined) {
 				sap.ui.getCore().byId('idMappedDataPreview').destroy();
 			}
-			var oTable = new JSONToTable('idMappedDataPreview', previewTable);
+			var oTable = new JSONToTable('idMappedDataPreview', previewTable,false);
 			this.getView().byId('idDataPreviewTable').addContent(oTable.getTable());
 			this.getView().getModel().setProperty('/mappingsPreviewTable', previewTable);
 		},
@@ -192,7 +194,7 @@ sap.ui.define([
 				if (sap.ui.getCore().byId('idMappedDataPreview') !== undefined) {
 					sap.ui.getCore().byId('idMappedDataPreview').destroy();
 				}
-				var oTable = new JSONToTable('idMappedDataPreview', aPreviewTableData);
+				var oTable = new JSONToTable('idMappedDataPreview', aPreviewTableData,false);
 				this.getView().byId('idDataPreviewTable').addContent(oTable.getTable());
 			}
 			this.getView().getModel().setProperty('/mappingsPreviewTable', aPreviewTableData);
@@ -214,10 +216,11 @@ sap.ui.define([
 				title: 'Create transformation logic',
 				content: [
 					new sap.m.MessageStrip({
-						text: 'Transformation actions are not reversible. To change the data, please re-upload the data files',
+						text: 'Transformation actions are not reversible. \n To reset, please delete and re do the mappings',
 						type: 'Warning'
 					}),
 					new sap.m.InputListItem({
+						visible : (sourceObject.fromControl.getBindingContext().getObject().DATA_TYPE_NAME == 'DATE'),
 						label: "Date format in sheets",
 						content: new sap.m.Input({
 							placeholder: 'Ex. yyy-mm-dd'

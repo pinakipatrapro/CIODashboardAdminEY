@@ -6,8 +6,9 @@ sap.ui.define([
 ], function (Table, Column, BaseObject, RawDataValidator) {
 	"use strict";
 
-	var tableConstructor = function (id, data) {
+	var tableConstructor = function (id, data,enabled) {
 		this._table = new Table(id, {
+			selectionMode : enabled ? 'Multi':'None',
 			rows: "{/tableData}",
 			threshold: 99999,
 			showColumnVisibilityMenu: true,
@@ -23,6 +24,7 @@ sap.ui.define([
 					}),
 					new sap.m.ToolbarSpacer(),
 					new sap.m.Button({
+						visible : enabled,
 						icon: 'sap-icon://add',
 						press: function (oEvent) {
 							var oTable = oEvent.getSource().getParent().getParent();
@@ -39,6 +41,7 @@ sap.ui.define([
 						}.bind(this)
 					}),
 					new sap.m.Button({
+						visible : enabled,
 						icon: 'sap-icon://delete',
 						press: function (oEvent) {
 							var oTable = oEvent.getSource().getParent().getParent();
@@ -82,7 +85,8 @@ sap.ui.define([
 			var aKey = Object.keys(this._localModel.getProperty('/tableData')[0]);
 			aKey.forEach(function (e) {
 				var input = new sap.m.Input({
-					value: "{" + e + "}"
+					value: "{" + e + "}",
+					editable : enabled
 				});
 				var column = new Column({
 					label: new sap.m.Label({
