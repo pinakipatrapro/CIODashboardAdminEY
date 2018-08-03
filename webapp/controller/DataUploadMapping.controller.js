@@ -3,14 +3,14 @@ sap.ui.define([
 	'sap/m/MessageBox',
 	"pinaki/ey/CIO/CIOControlPanel/api/JSONToTable",
 	"pinaki/ey/CIO/CIOControlPanel/api/MappingValidator"
-], function (Controller, MessageBox, JSONToTable,MappingValidator) {
+], function (Controller, MessageBox, JSONToTable, MappingValidator) {
 	"use strict";
 	return Controller.extend("pinaki.ey.CIO.CIOControlPanel.controller.DataUploadMapping", {
 		onInit: function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.getRoute("DataUploadMapping").attachPatternMatched(this._onRouteMatched, this);
 		},
-		navToExcelUpload : function(){
+		navToExcelUpload: function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("DataUpload");
 		},
@@ -100,8 +100,8 @@ sap.ui.define([
 				content: [
 					new sap.ui.core.Icon({
 						src: "sap-icon://syntax",
-						color : '#1de202',
-						press : [this.openTransformationDialog,this]
+						color: '#1de202',
+						press: [this.openTransformationDialog, this]
 					}).addStyleClass('sapUiTinyMarginBeginEnd'),
 					new sap.m.Label({
 						text: '{from}'
@@ -175,7 +175,7 @@ sap.ui.define([
 			var sourceData = this.getView().getModel().getProperty('/UploadedData/currentSheetData');
 			var aPreviewTableData = this.getView().getModel().getProperty('/mappingsPreviewTable');
 			var oPreviewTableData = aPreviewTableData[0];
-			Object.keys(oPreviewTableData).forEach(v => oPreviewTableData[v] = '') 
+			Object.keys(oPreviewTableData).forEach(v => oPreviewTableData[v] = '')
 			var oPreviewTableDataCopy = oPreviewTableData;
 			aPreviewTableData = [];
 
@@ -196,55 +196,110 @@ sap.ui.define([
 				this.getView().byId('idDataPreviewTable').addContent(oTable.getTable());
 			}
 			this.getView().getModel().setProperty('/mappingsPreviewTable', aPreviewTableData);
+			this.createDateTransformationLogic();
 		},
-		validateMappings : function(){
+		validateMappings: function () {
 			var columns = this.getView().getModel().getProperty('/dbColumns');
 			var mappingData = this.getView().getModel().getProperty('/mappingsPreviewTable')
-			var validator = new MappingValidator(mappingData,columns);
+			var validator = new MappingValidator(mappingData, columns);
 			var validationMessages = validator.validateData();
 			this.getView().getModel().setProperty('/uploadValidationMessages', validationMessages);
-			if(validationMessages.length > 0 ){
-				this.openPopOverMessage();				
+			if (validationMessages.length > 0) {
+				this.openPopOverMessage();
 			}
 		},
-		openTransformationDialog : function(){
+		openTransformationDialog: function (oEvent) {
+			var sourceObject = oEvent.getSource().getBindingContext().getObject();
 			var dialog = new sap.m.Dialog({
-				title : 'Create transformation logic',
-				content : [
-					new sap.m.TextArea({
-						cols : 100,
-						rows : 20
+				title: 'Create transformation logic',
+				content: [
+					new sap.m.MessageStrip({
+						text: 'Transformation actions are not reversible. To change the data, please re-upload the data files',
+						type: 'Warning'
+					}),
+					new sap.m.InputListItem({
+						label: "Date format in sheets",
+						content: new sap.m.Input({
+							placeholder: 'Ex. yyy-mm-dd'
+						})
 					})
 				],
-				buttons : [
+				buttons: [
 					new sap.m.Button({
-						text : 'Ok',
-						press : function(oEvent){
+						text: 'Ok',
+						press: function (oEvent) {
+							var dateFormat = oEvent.getSource().getParent().getContent()[1].getContent()[0].getValue();
+							if (dateFormat.length > 0) {
+								sourceObject['dateTransformationFormat'] = dateFormat;
+							}
 							oEvent.getSource().getParent().close();
-						}
+							this.createDateTransformationLogic();
+						}.bind(this)
 					})
-					]
+				]
 			});
 			dialog.open();
 		},
-		openPopOverMessage : function(){
+		openPopOverMessage: function () {
 			var messageAnchor = this.getView().byId('idMessageButton');
-			var popover = new sap.m.Popover({
-				content : [
-					new sap.m.MessageView({
-						items : {
-							path : '/uploadValidationMessages',
-							template : new sap.m.MessageItem({
-								title : '{columnsName}',
-								description : '{text}',
-								counter : '{=${/status}.length}'
-							})
-						}
-					})	
-				]
+			var messageView = new sap.m.MessageView({
+				groupItems: true,
+				items: {
+					path: '/uploadValidationMessages',
+					template: new sap.m.MessageItem({
+						title: '{description}',
+						description: '{text}',
+						type: '{state}',
+						groupName: '{group}'
+					})
+				}
 			});
-			popover.setModel(this.getView().getModel());
+			messageView.setModel(this.getView().getModel());
+			var popover = new sap.m.Popover({
+				placement: 'Top',
+				resizable: true,
+				title: 'Data Errors',
+				content: messageView
+			});
+
 			popover.openBy(messageAnchor);
+		},
+		createDateTransformationLogic: function () {
+			var aMappings = this.getView().getModel().getProperty('/mappedColumns');
+			var data = this.getView().getModel().getProperty('/mappingsPreviewTable');
+			for (var i = 0; i < aMappings.length; i++) {
+				if (aMappings[i].dateTransformationFormat) {
+					if (aMappings[i].dateTransformationFormat.length > 0) {
+						var dateFormat = aMappings[i].dateTransformationFormat;
+						if (dateFormat.indexOf('/') > 0) {
+							var aDateElements = dateFormat.split('/');
+						} else {
+							var aDateElements = dateFormat.split('-');
+						}
+						data.forEach(function (e) {
+							var inDate = e[aMappings[i].from];
+							if (inDate.indexOf('/') > 0) {
+								var aInDate = inDate.split('/');
+							} else {
+								var aInDate = inDate.split('-');
+							}
+							if (aInDate.length > 2) {
+								for (var j = 0; j < aInDate.length; j++) {
+									if (aDateElements[j].indexOf('y') > -1) {
+										var y = aInDate[j].toLocaleLowerCase().padStart(4, "20");
+									} else if (aDateElements[j].indexOf('m') > -1) {
+										var m = aInDate[j].toLocaleLowerCase().padStart(2, "0");
+									} else if (aDateElements[j].indexOf('d') > -1) {
+										var d = aInDate[j].toLocaleLowerCase().padStart(2, "0");
+									}
+								}
+								e[aMappings[i].from] = y + m + d;
+							}
+						})
+					}
+				}
+			}
+
 		}
 
 	});
