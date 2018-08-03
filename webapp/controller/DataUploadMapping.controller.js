@@ -10,6 +10,10 @@ sap.ui.define([
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.getRoute("DataUploadMapping").attachPatternMatched(this._onRouteMatched, this);
 		},
+		navToExcelUpload : function(){
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("DataUpload");
+		},
 		_onRouteMatched: function (oEvent) {
 			var isValidContext = ' ';
 			if (!!this.getView().getModel().getData().UploadedData) {
@@ -197,7 +201,11 @@ sap.ui.define([
 			var columns = this.getView().getModel().getProperty('/dbColumns');
 			var mappingData = this.getView().getModel().getProperty('/mappingsPreviewTable')
 			var validator = new MappingValidator(mappingData,columns);
-			validator.validateData();
+			var validationMessages = validator.validateData();
+			this.getView().getModel().setProperty('/uploadValidationMessages', validationMessages);
+			if(validationMessages.length > 0 ){
+				this.openPopOverMessage();				
+			}
 		},
 		openTransformationDialog : function(){
 			var dialog = new sap.m.Dialog({
@@ -217,7 +225,26 @@ sap.ui.define([
 					})
 					]
 			});
-			var messages = dialog.open();
+			dialog.open();
+		},
+		openPopOverMessage : function(){
+			var messageAnchor = this.getView().byId('idMessageButton');
+			var popover = new sap.m.Popover({
+				content : [
+					new sap.m.MessageView({
+						items : {
+							path : '/uploadValidationMessages',
+							template : new sap.m.MessageItem({
+								title : '{columnsName}',
+								description : '{text}',
+								counter : '{=${/status}.length}'
+							})
+						}
+					})	
+				]
+			});
+			popover.setModel(this.getView().getModel());
+			popover.openBy(messageAnchor);
 		}
 
 	});
