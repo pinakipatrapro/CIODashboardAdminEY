@@ -10,7 +10,8 @@
 							<Toolbar>
 								<Title text="Table Columns" level="H2"/>
 								<ToolbarSpacer/>
-								<Button type="emphasized" icon="sap-icon://journey-arrive" tooltip="Map by Name" press="mapByName"/>
+								<Button icon="sap-icon://number-sign" tooltip="Map to constant" press="mapToConstant"/>
+								<Button type="Emphasized" icon="sap-icon://journey-arrive" tooltip="Map by Name" press="mapByName"/>
 							</Toolbar>
 						</headerToolbar>
 						<dragDropConfig>

@@ -19,7 +19,7 @@ sap.ui.define([
 			if (!!this.getView().getModel().getData().UploadedData) {
 				if (!!this.getView().getModel().getData().UploadedData.currentSheetData)
 					isValidContext = 'X';
-			}
+			} 
 			if (isValidContext == ' ') {
 				setTimeout(function () {
 					MessageBox.error('Please upload excel data first', {
@@ -224,8 +224,14 @@ sap.ui.define([
 					new sap.m.InputListItem({
 						visible: (sourceObject.fromControl.getBindingContext().getObject().DATA_TYPE_NAME == 'DATE'),
 						label: "Date format in sheets",
-						content: new sap.m.Input({
-							placeholder: 'Ex. yyy-mm-dd'
+						content: new sap.m.ComboBox({
+							placeholder: 'Ex. yyy-mm-dd',
+							items : [
+								new sap.ui.core.Item({text : 'mm-dd-yyyy'}),
+								new sap.ui.core.Item({text : 'dd-mm-yyyy'}),
+								new sap.ui.core.Item({text : 'mm/dd/yyyy'}),
+								new sap.ui.core.Item({text : 'dd/mm/yyyy'})
+							]
 						})
 					})
 				],
@@ -304,6 +310,7 @@ sap.ui.define([
 					}
 				}
 			}
+			sap.ui.getCore().byId('idMappedDataPreview').getModel().refresh();
 
 		},
 		mapByName: function () {
@@ -329,6 +336,40 @@ sap.ui.define([
 			}
 			this.getView().getModel().setProperty('/mappedColumns', aExistingMappings);
 			this.onMappingUpdate();
+		},
+		mapToConstant : function(){
+			var data					= this.getView().getModel().getProperty('/mappingsPreviewTable');
+			var aParentControlListItem	= this.getView().byId('idTableColumnList').getSelectedItem();
+			if(!aParentControlListItem){
+				sap.m.MessageToast.show('Please select an item first');
+				return;	
+			};
+			var key = aParentControlListItem.getProperty('title');
+			var dialog = new sap.m.Dialog({
+				title : 'Enter constant value',
+				content : [
+					new sap.m.MessageStrip({
+						text: 'Updating the mappings will reset the constants value.\n Please do this activity in the later stages once the mapping is done',
+						type: 'Warning' 
+					}),
+					new sap.m.Input({placeholder : 'Enter Value Here'})
+				],
+				buttons : [
+					new sap.m.Button({
+						text : 'Ok',
+						press : function(oEvent){
+							data.forEach(function(e){
+								e[key] = oEvent.getSource().getParent().getContent()[1].getValue();
+							});
+							this.getView().getModel().setProperty('/mappingsPreviewTable',data);
+							sap.ui.getCore().byId('idMappedDataPreview').getModel().refresh();
+							oEvent.getSource().getParent().close();
+							this.getView().byId('idTableColumnList').removeSelections();
+						}.bind(this)
+					})	
+				]
+			});
+			dialog.open();
 		}
 
 	});

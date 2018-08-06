@@ -19,6 +19,13 @@
             "name": "api/JSONToTable.js"
         },
         {
+            "name": "api/MappingValidator-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "api/MappingValidator.js"
+        },
+        {
             "name": "api/RawDataValidator-dbg.js",
             "isDebug": true
         },
@@ -136,6 +143,9 @@
             "name": "tmp/api/JSONToTable.js"
         },
         {
+            "name": "tmp/api/MappingValidator.js"
+        },
+        {
             "name": "tmp/api/RawDataValidator.js"
         },
         {
@@ -219,6 +229,9 @@
         },
         {
             "name": "tmp-dbg/api/JSONToTable.js"
+        },
+        {
+            "name": "tmp-dbg/api/MappingValidator.js"
         },
         {
             "name": "tmp-dbg/api/RawDataValidator.js"
