@@ -124,7 +124,7 @@ sap.ui.define([
 			droppedControl.setVisible(false);
 
 			var draged = draggedControl.getProperty('title');
-			var fromDatatype =draggedControl.getProperty('info')
+			var fromDatatype = draggedControl.getProperty('info')
 			var dropped = droppedControl.getProperty('title');
 
 			var aExistingMappings = [];
@@ -135,7 +135,7 @@ sap.ui.define([
 			aExistingMappings.push({
 				from: draged,
 				to: dropped,
-				datatype : fromDatatype,
+				datatype: fromDatatype,
 				fromControl: draggedControl,
 				toControl: droppedControl
 			});
@@ -167,7 +167,7 @@ sap.ui.define([
 			if (sap.ui.getCore().byId('idMappedDataPreview') !== undefined) {
 				sap.ui.getCore().byId('idMappedDataPreview').destroy();
 			}
-			var oTable = new JSONToTable('idMappedDataPreview', previewTable,false);
+			var oTable = new JSONToTable('idMappedDataPreview', previewTable, false);
 			this.getView().byId('idDataPreviewTable').addContent(oTable.getTable());
 			this.getView().getModel().setProperty('/mappingsPreviewTable', previewTable);
 		},
@@ -194,7 +194,7 @@ sap.ui.define([
 				if (sap.ui.getCore().byId('idMappedDataPreview') !== undefined) {
 					sap.ui.getCore().byId('idMappedDataPreview').destroy();
 				}
-				var oTable = new JSONToTable('idMappedDataPreview', aPreviewTableData,false);
+				var oTable = new JSONToTable('idMappedDataPreview', aPreviewTableData, false);
 				this.getView().byId('idDataPreviewTable').addContent(oTable.getTable());
 			}
 			this.getView().getModel().setProperty('/mappingsPreviewTable', aPreviewTableData);
@@ -220,7 +220,7 @@ sap.ui.define([
 						type: 'Warning'
 					}),
 					new sap.m.InputListItem({
-						visible : (sourceObject.fromControl.getBindingContext().getObject().DATA_TYPE_NAME == 'DATE'),
+						visible: (sourceObject.fromControl.getBindingContext().getObject().DATA_TYPE_NAME == 'DATE'),
 						label: "Date format in sheets",
 						content: new sap.m.Input({
 							placeholder: 'Ex. yyy-mm-dd'
@@ -303,6 +303,30 @@ sap.ui.define([
 				}
 			}
 
+		},
+		mapByName: function () {
+			var aParentControlListItems = this.getView().byId('idTableColumnList').getItems();
+			var aChildControlListItems = this.getView().byId('idUploadedDataColumns').getItems();
+			var aExistingMappings = [];
+			for (var i = 0; i < aParentControlListItems.length; i++) {
+				var from = aParentControlListItems[i].getProperty('title');
+				for (var j = 0; j < aChildControlListItems.length; j++) {
+					var to = aChildControlListItems[j].getProperty('title');
+					if (from === to) {
+						aExistingMappings.push({
+							from: from,
+							to: to,
+							datatype: aParentControlListItems[i].getProperty('info'),
+							fromControl: aParentControlListItems[i],
+							toControl: aChildControlListItems[j]
+						});
+						aChildControlListItems[j].setVisible(false);
+						aParentControlListItems[i].setVisible(false);
+					}
+				}
+			}
+			this.getView().getModel().setProperty('/mappedColumns', aExistingMappings);
+			this.onMappingUpdate();
 		}
 
 	});

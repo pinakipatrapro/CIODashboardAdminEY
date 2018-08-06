@@ -4,13 +4,13 @@
 	<Page class="sapUiSizeCompact" title="Map Uploaded Data " busyIndicatorDelay="0" floatingFooter="true">
 		<content>
 			<Panel headerText="Manage Mappings" expandable="true" expanded="true">
-				<l:Splitter>
-					<List  id="idTableColumnList">
+				<l:Splitter height="400px"> 
+					<List  id="idTableColumnList" mode="SingleSelectMaster">
 						<headerToolbar>
 							<Toolbar>
 								<Title text="Table Columns" level="H2"/>
 								<ToolbarSpacer/>
-								<Button icon="sap-icon://step" tooltip="Map by Name"/>
+								<Button type="emphasized" icon="sap-icon://journey-arrive" tooltip="Map by Name" press="mapByName"/>
 							</Toolbar>
 						</headerToolbar>
 						<dragDropConfig>
