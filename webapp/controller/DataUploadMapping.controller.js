@@ -177,7 +177,9 @@ sap.ui.define([
 			var sourceData = this.getView().getModel().getProperty('/UploadedData/currentSheetData');
 			var aPreviewTableData = this.getView().getModel().getProperty('/mappingsPreviewTable');
 			var oPreviewTableData = aPreviewTableData[0];
-			Object.keys(oPreviewTableData).forEach(v => oPreviewTableData[v] = '')
+			Object.keys(oPreviewTableData).forEach(function(v){
+				oPreviewTableData[v] = '';
+			})
 			var oPreviewTableDataCopy = oPreviewTableData;
 			aPreviewTableData = [];
 
