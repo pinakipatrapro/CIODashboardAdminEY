@@ -65,7 +65,7 @@ sap.ui.define([
 			aValues.forEach(function (e, index) {
 				if (datatype == 'DECIMAL' || datatype == 'DOUBLE' || datatype == 'INTEGER' || datatype == 'FLOAT' || datatype == 'SMALLINT' ||
 					datatype == 'TINYINT') {
-					if (isNaN(parseFloat(e, 0))) {
+					if (e.length > 0 && isNaN(parseFloat(e, 0))) {
 						this._messages.push({
 							text: 'Data type mismatch',
 							description: 'Data type mismatch Expected :' + datatype + ' , Found  String/Charedter . Error row : ' + (index + 1),

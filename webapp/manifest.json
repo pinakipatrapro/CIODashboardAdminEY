@@ -18,7 +18,7 @@
 		},
 		"dataSources": {
 			"paginatedService": {
-				"uri": "/eyhcp/Pinaki/RandomDataGenerator/Data/Service/DataGen.xsodata",
+				"uri": "/eyhcp/CIO/DataUploader/Services/Main.xsodata",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0"

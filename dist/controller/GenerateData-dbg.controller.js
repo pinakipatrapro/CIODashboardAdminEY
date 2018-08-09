@@ -88,7 +88,7 @@ sap.ui.define([
 			that.getView().setBusy(true);
 			this.applyWeightage();
 			$.ajax({
-				url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/generateData.xsjs?mode=generateWithInput",
+				url: "/eyhcp/CIO/GenerateData/Scripts/GenerateData.xsjs?mode=generateWithInput",
 				method: "POST",
 				data: JSON.stringify(data).replace(/%/g, 'X*PERC*X'),
 				success: function (response) {
@@ -109,7 +109,7 @@ sap.ui.define([
 		readData: function () {
 			var that = this;
 			$.ajax({
-				url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/generateData.xsjs?mode=readMasterData",
+				url: "/eyhcp/CIO/GenerateData/Scripts/GenerateData.xsjs?mode=readMasterData",
 				cache: false,
 				success: function (data) {
 					var responseData = JSON.parse(data).data;
@@ -134,7 +134,7 @@ sap.ui.define([
 			var that = this;
 			that.getView().setBusy(true);
 			$.ajax({
-				url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/generateData.xsjs?mode=status",
+				url: "/eyhcp/CIO/GenerateData/Scripts/GenerateData.xsjs?mode=status",
 				cache: false,
 				success: function (data) {
 					var responseData = JSON.parse(data);
@@ -237,7 +237,7 @@ sap.ui.define([
 			var that = this;
 			that.getView().setBusy(true);
 			$.ajax({
-				url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/weightageDataRead.xsjs",
+				url: "/eyhcp/CIO/GenerateData/Scripts/ReadWeightageData.xsjs",
 				cache: false,
 				success: function (data) {
 					that.getView().getModel().setProperty("/generateData/weightage/dataOFPK", data);

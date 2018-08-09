@@ -32,7 +32,9 @@ sap.ui.define([
 						projBudgetCurrency: [],
 						wbs: [],
 						wbsProjName: [],
-						wbsExpenseType: []
+						wbsExpenseType: [],
+						kpi : [],
+						initiativesName : []
 					},
 					weightage: {
 						costCentVglAcc: [],
@@ -88,7 +90,7 @@ sap.ui.define([
 			that.getView().setBusy(true);
 			this.applyWeightage();
 			$.ajax({
-				url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/generateData.xsjs?mode=generateWithInput",
+				url: "/eyhcp/CIO/GenerateData/Scripts/GenerateData.xsjs?mode=generateWithInput",
 				method: "POST",
 				data: JSON.stringify(data).replace(/%/g, 'X*PERC*X'),
 				success: function (response) {
@@ -109,7 +111,7 @@ sap.ui.define([
 		readData: function () {
 			var that = this;
 			$.ajax({
-				url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/generateData.xsjs?mode=readMasterData",
+				url: "/eyhcp/CIO/GenerateData/Scripts/GenerateData.xsjs?mode=readMasterData",
 				cache: false,
 				success: function (data) {
 					var responseData = JSON.parse(data).data;
@@ -126,6 +128,8 @@ sap.ui.define([
 					that.getView().getModel().setProperty('/generateData/advancedSettings/wbs', responseData.wbs);
 					that.getView().getModel().setProperty('/generateData/advancedSettings/wbsProjName', responseData.wbsProjName);
 					that.getView().getModel().setProperty('/generateData/advancedSettings/wbsExpenseType', responseData.wbsExpenseType);
+					that.getView().getModel().setProperty('/generateData/advancedSettings/kpi', responseData.kpi);
+					that.getView().getModel().setProperty('/generateData/advancedSettings/initiativesName', responseData.initiativesName);
 					that.getView().getModel().setProperty('/generateData/noOfRecords', responseData.noOfRecords);
 				}
 			});
@@ -134,7 +138,7 @@ sap.ui.define([
 			var that = this;
 			that.getView().setBusy(true);
 			$.ajax({
-				url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/generateData.xsjs?mode=status",
+				url: "/eyhcp/CIO/GenerateData/Scripts/GenerateData.xsjs?mode=status",
 				cache: false,
 				success: function (data) {
 					var responseData = JSON.parse(data);
@@ -237,7 +241,7 @@ sap.ui.define([
 			var that = this;
 			that.getView().setBusy(true);
 			$.ajax({
-				url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/weightageDataRead.xsjs",
+				url: "/eyhcp/CIO/GenerateData/Scripts/ReadWeightageData.xsjs",
 				cache: false,
 				success: function (data) {
 					that.getView().getModel().setProperty("/generateData/weightage/dataOFPK", data);
