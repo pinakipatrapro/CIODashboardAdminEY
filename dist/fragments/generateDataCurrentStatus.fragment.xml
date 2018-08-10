@@ -7,7 +7,7 @@
 					<Button icon="sap-icon://refresh" text="Refresh" press="readStatus"/>
 				</OverflowToolbar>
 			</headerToolbar>
-			<DisplayListItem label="Table Name : {tableName}" type="Navigation" value="Number of records : {count}" press="navToDisplayTable"/>
+			<DisplayListItem label="Table Name : {tableNameText}" type="Navigation" value="Number of records : {count}" press="navToDisplayTable"/>
 		</List>
 	</Panel>
 </core:FragmentDefinition>
