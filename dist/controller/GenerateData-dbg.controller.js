@@ -32,7 +32,9 @@ sap.ui.define([
 						projBudgetCurrency: [],
 						wbs: [],
 						wbsProjName: [],
-						wbsExpenseType: []
+						wbsExpenseType: [],
+						kpi : [],
+						initiativesName : []
 					},
 					weightage: {
 						costCentVglAcc: [],
@@ -126,6 +128,8 @@ sap.ui.define([
 					that.getView().getModel().setProperty('/generateData/advancedSettings/wbs', responseData.wbs);
 					that.getView().getModel().setProperty('/generateData/advancedSettings/wbsProjName', responseData.wbsProjName);
 					that.getView().getModel().setProperty('/generateData/advancedSettings/wbsExpenseType', responseData.wbsExpenseType);
+					that.getView().getModel().setProperty('/generateData/advancedSettings/kpi', responseData.kpi);
+					that.getView().getModel().setProperty('/generateData/advancedSettings/initiativesName', responseData.initiativesName);
 					that.getView().getModel().setProperty('/generateData/noOfRecords', responseData.noOfRecords);
 				}
 			});

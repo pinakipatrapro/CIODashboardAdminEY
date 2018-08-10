@@ -17,6 +17,7 @@
 			title="Cost Pool Name(s)"
 			path="/generateData/advancedSettings/costPool"
 			modelProperty="name"
+			visible="false"
 			expanded="false" expandable="true"
 		></ext:PanelExtension>
 		<ext:PanelExtension 
@@ -76,6 +77,18 @@
 		<ext:PanelExtension 
 			title="Expense Type(s)"
 			path="/generateData/advancedSettings/wbsExpenseType"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="KPI Name(s)"
+			path="/generateData/advancedSettings/kpi"
+			modelProperty="name"
+			expanded="false" expandable="true"
+		></ext:PanelExtension>
+		<ext:PanelExtension 
+			title="Initiative Name(s)"
+			path="/generateData/advancedSettings/initiativesName"
 			modelProperty="name"
 			expanded="false" expandable="true"
 		></ext:PanelExtension>
