@@ -2,8 +2,9 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	'sap/m/MessageBox',
 	"pinaki/ey/CIO/CIOControlPanel/api/JSONToTable",
-	"pinaki/ey/CIO/CIOControlPanel/api/MappingValidator"
-], function (Controller, MessageBox, JSONToTable, MappingValidator) {
+	"pinaki/ey/CIO/CIOControlPanel/api/MappingValidator",
+	"pinaki/ey/CIO/CIOControlPanel/api/DataUploader"
+], function (Controller, MessageBox, JSONToTable, MappingValidator, DataUploader) {
 	"use strict";
 	return Controller.extend("pinaki.ey.CIO.CIOControlPanel.controller.DataUploadMapping", {
 		onInit: function () {
@@ -19,7 +20,7 @@ sap.ui.define([
 			if (!!this.getView().getModel().getData().UploadedData) {
 				if (!!this.getView().getModel().getData().UploadedData.currentSheetData)
 					isValidContext = 'X';
-			} 
+			}
 			if (isValidContext == ' ') {
 				setTimeout(function () {
 					MessageBox.error('Please upload excel data first', {
@@ -177,7 +178,7 @@ sap.ui.define([
 			var sourceData = this.getView().getModel().getProperty('/UploadedData/currentSheetData');
 			var aPreviewTableData = this.getView().getModel().getProperty('/mappingsPreviewTable');
 			var oPreviewTableData = aPreviewTableData[0];
-			Object.keys(oPreviewTableData).forEach(function(v){
+			Object.keys(oPreviewTableData).forEach(function (v) {
 				oPreviewTableData[v] = '';
 			})
 			var oPreviewTableDataCopy = oPreviewTableData;
@@ -211,6 +212,7 @@ sap.ui.define([
 			if (validationMessages.length > 0) {
 				this.openPopOverMessage();
 			}
+			return validationMessages;
 		},
 		openTransformationDialog: function (oEvent) {
 			var sourceObject = oEvent.getSource().getBindingContext().getObject();
@@ -226,11 +228,19 @@ sap.ui.define([
 						label: "Date format in sheets",
 						content: new sap.m.ComboBox({
 							placeholder: 'Ex. yyy-mm-dd',
-							items : [
-								new sap.ui.core.Item({text : 'mm-dd-yyyy'}),
-								new sap.ui.core.Item({text : 'dd-mm-yyyy'}),
-								new sap.ui.core.Item({text : 'mm/dd/yyyy'}),
-								new sap.ui.core.Item({text : 'dd/mm/yyyy'})
+							items: [
+								new sap.ui.core.Item({
+									text: 'mm-dd-yyyy'
+								}),
+								new sap.ui.core.Item({
+									text: 'dd-mm-yyyy'
+								}),
+								new sap.ui.core.Item({
+									text: 'mm/dd/yyyy'
+								}),
+								new sap.ui.core.Item({
+									text: 'dd/mm/yyyy'
+								})
 							]
 						})
 					})
@@ -337,40 +347,85 @@ sap.ui.define([
 			this.getView().getModel().setProperty('/mappedColumns', aExistingMappings);
 			this.onMappingUpdate();
 		},
-		mapToConstant : function(){
-			var data					= this.getView().getModel().getProperty('/mappingsPreviewTable');
-			var aParentControlListItem	= this.getView().byId('idTableColumnList').getSelectedItem();
-			if(!aParentControlListItem){
+		mapToConstant: function () {
+			var data = this.getView().getModel().getProperty('/mappingsPreviewTable');
+			var aParentControlListItem = this.getView().byId('idTableColumnList').getSelectedItem();
+			if (!aParentControlListItem) {
 				sap.m.MessageToast.show('Please select an item first');
-				return;	
+				return;
 			};
 			var key = aParentControlListItem.getProperty('title');
 			var dialog = new sap.m.Dialog({
-				title : 'Enter constant value',
-				content : [
+				title: 'Enter constant value',
+				content: [
 					new sap.m.MessageStrip({
 						text: 'Updating the mappings will reset the constants value.\n Please do this activity in the later stages once the mapping is done',
-						type: 'Warning' 
+						type: 'Warning'
 					}),
-					new sap.m.Input({placeholder : 'Enter Value Here'})
+					new sap.m.Input({
+						placeholder: 'Enter Value Here'
+					})
 				],
-				buttons : [
+				buttons: [
 					new sap.m.Button({
-						text : 'Ok',
-						press : function(oEvent){
-							data.forEach(function(e){
+						text: 'Ok',
+						press: function (oEvent) {
+							data.forEach(function (e) {
 								e[key] = oEvent.getSource().getParent().getContent()[1].getValue();
 							});
-							this.getView().getModel().setProperty('/mappingsPreviewTable',data);
+							this.getView().getModel().setProperty('/mappingsPreviewTable', data);
 							sap.ui.getCore().byId('idMappedDataPreview').getModel().refresh();
 							oEvent.getSource().getParent().close();
 							this.getView().byId('idTableColumnList').removeSelections();
 						}.bind(this)
-					})	
+					})
 				]
 			});
 			dialog.open();
-		}
+		},
+		uploadData: function () {
+			var that = this;
+			var isValid = this.validateMappings().length == 0;
+			if (!isValid) {
+				return;
+			};
+			var data = this.getView().getModel().getProperty('/mappingsPreviewTable');
+			var tableName = this.getView().getModel().getProperty('/selectedTableTechnicalName');
+
+			//Ask Delta or Full Load
+			sap.m.MessageBox.confirm(
+				"How do you want to load the data", {
+					actions: ["Full Load", "Delta Load"],
+					onClose: function (sAction) {
+						var mode = sAction == "Full Load" ? 'FL':'DL';
+						var dataUploader = new DataUploader(data, tableName,mode);
+						var uploadPromise = dataUploader.execute();
+						that.getView().setBusy(true);
+						uploadPromise.then(function (e) {
+							sap.m.MessageToast.show(e.message);
+							that.getView().setBusy(false);
+							// this.navToDisplayTable(tableName);
+						}.bind(that));
+					}
+				}
+			);
+
+		},
+		navToDisplayTable: function (tableName) {
+			var tableName = tableName;
+			var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
+			var hash = (oCrossAppNavigator && oCrossAppNavigator.hrefForExternal({
+				target: {
+					semanticObject: "cioadmin",
+					action: "Display&/tableViewer/" + btoa(tableName)
+				}
+			})) || "";
+			oCrossAppNavigator.toExternal({
+				target: {
+					shellHash: hash
+				}
+			}); // navigate to Supplier application
+		},
 
 	});
 });

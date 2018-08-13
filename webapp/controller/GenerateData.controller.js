@@ -228,7 +228,7 @@ sap.ui.define([
 			var that = this;
 			that.getView().setBusy(true);
 			$.ajax({
-				url: "/eyhcp/Pinaki/RandomDataGenerator/Scripts/getLogFromId.xsjs?id=" + id,
+				url: "/eyhcp/CIO/GenerateData/Scripts/GetLogFromId.xsjs?id=" + id,
 				cache: false,
 				success: function (data) {
 					var responseData = JSON.parse(data);

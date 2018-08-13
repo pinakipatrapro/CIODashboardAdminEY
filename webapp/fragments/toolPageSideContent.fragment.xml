@@ -13,6 +13,7 @@
 				<tnt:NavigationListItem icon="sap-icon://upload-to-cloud" text="Upload Data" select="navToDataUpload" expanded="true">
 					<tnt:NavigationListItem icon="sap-icon://upload-to-cloud" text="Upload Excel Data" select="chlidItemPress" app:idControl="idUploadExcelData"/>
 				</tnt:NavigationListItem>
+				<tnt:NavigationListItem icon="sap-icon://kpi-corporate-performance" text="Load Data" expanded="true" select="navToLoadData"/>
 			</tnt:items>
 		</tnt:NavigationList>
 	</tnt:SideNavigation>

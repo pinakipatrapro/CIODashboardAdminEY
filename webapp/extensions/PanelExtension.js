@@ -41,7 +41,7 @@ sap.ui.define([
 			delete: function (oEvent) {
 				var modelValues = this.getModel().getProperty(this.getPath());
 				var mmodelPath = oEvent.getParameter('listItem').getBindingContext().sPath;
-				var index = parseInt(path.substring(mmodelPath.lastIndexOf('/') + 1), 0);
+				var index = parseInt(mmodelPath.substring(mmodelPath.lastIndexOf('/') + 1), 0);
 				modelValues.splice(index, 1);
 				this.getModel().setProperty(this.getPath(),modelValues);
 			}.bind(this)

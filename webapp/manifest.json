@@ -131,6 +131,13 @@
 					"target": [
 						"DataUploadMapping"
 					]
+				},
+				{
+					"name": "LoadData",
+					"pattern": "LoadData",
+					"target": [
+						"LoadData"
+					]
 				}
 			],
 			"targets": {
@@ -163,6 +170,12 @@
 					"transition": "slide",
 					"clearControlAggregation": false,
 					"viewName": "DataUploadMapping"
+				},
+				"LoadData": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewName": "LoadData"
 				}
 			}
 		}

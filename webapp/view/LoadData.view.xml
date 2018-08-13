@@ -1,0 +1,26 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	controllerName="pinaki.ey.CIO.CIOControlPanel.controller.LoadData" displayBlock="true">
+	<Page title="Load Data" busyIndicatorDelay="0" floatingFooter="true">
+		<content>
+			<MessageStrip
+				text="Use this tool to load data from specified sources for visualization in SAC. This will delete the existing data and the changes cannot be undone"
+				type="Information" showIcon="true" customIcon="sap-icon://lightbulb" class="sapUiSmallMargin"/>
+			<OverflowToolbar class="sapUiSmallMargin">
+				<Label text="Load generated data" design="Bold"/>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://media-play" type="Transparent" press="loadData" app:targets="from=GeneratedData*to=DashboardData"/>
+			</OverflowToolbar>
+			<OverflowToolbar class="sapUiSmallMargin">
+				<Label text="Load uploaded data" design="Bold"/>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://media-play" type="Transparent" press="loadData" app:targets="from=UploadedData*to=DashboardData"/>
+			</OverflowToolbar>
+		</content>
+		<footer>
+			<OverflowToolbar >
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

@@ -12,6 +12,13 @@
             "name": "Component.js"
         },
         {
+            "name": "api/DataUploader-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "api/DataUploader.js"
+        },
+        {
             "name": "api/JSONToTable-dbg.js",
             "isDebug": true
         },
@@ -66,6 +73,13 @@
         },
         {
             "name": "controller/Home.controller.js"
+        },
+        {
+            "name": "controller/LoadData-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/LoadData.controller.js"
         },
         {
             "name": "css/style-dbg.css",
@@ -140,6 +154,9 @@
             "name": "tmp/Component.js"
         },
         {
+            "name": "tmp/api/DataUploader.js"
+        },
+        {
             "name": "tmp/api/JSONToTable.js"
         },
         {
@@ -162,6 +179,9 @@
         },
         {
             "name": "tmp/controller/Home.controller.js"
+        },
+        {
+            "name": "tmp/controller/LoadData.controller.js"
         },
         {
             "name": "tmp/css/style.css"
@@ -222,10 +242,16 @@
             "name": "tmp/view/Home.view.xml"
         },
         {
+            "name": "tmp/view/LoadData.view.xml"
+        },
+        {
             "name": "tmp/view/Welcome.view.xml"
         },
         {
             "name": "tmp-dbg/Component.js"
+        },
+        {
+            "name": "tmp-dbg/api/DataUploader.js"
         },
         {
             "name": "tmp-dbg/api/JSONToTable.js"
@@ -250,6 +276,9 @@
         },
         {
             "name": "tmp-dbg/controller/Home.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/LoadData.controller.js"
         },
         {
             "name": "tmp-dbg/css/style.css"
@@ -284,6 +313,9 @@
         },
         {
             "name": "view/Home.view.xml"
+        },
+        {
+            "name": "view/LoadData.view.xml"
         },
         {
             "name": "view/Welcome.view.xml"

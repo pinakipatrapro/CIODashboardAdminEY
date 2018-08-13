@@ -89,6 +89,7 @@ sap.ui.define([
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			// map data to global model
 			this.getView().getModel().setProperty('/UploadedData',this.getView().getModel('idUploadDataModel').getData());
+			this.getView().getModel().setProperty('/selectedTableTechnicalName',this.getView().getModel('idUploadDataModel').getProperty('/selectedTable'));
 			oRouter.navTo("DataUploadMapping");
 		},
 	});

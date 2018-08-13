@@ -33,6 +33,7 @@
 				<ToolbarSpacer/>
 				<Button text="Re-Upload Data" press="navToExcelUpload" icon="sap-icon://nav-back"/>
 				<Button text="Validate" press="validateMappings"/>
+				<Button text="Upload" icon="sap-icon://upload-to-cloud" type="Emphasized" press="uploadData"/>
 			</OverflowToolbar>
 		</footer>
 	</Page>
