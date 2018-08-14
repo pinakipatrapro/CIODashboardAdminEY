@@ -1,5 +1,6 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core">
+<core:FragmentDefinition xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core"  xmlns:ext="pinaki.ey.CIO.CIOControlPanel.extensions">
 	<Panel id="idGenDataBasicSettingsPanel" expanded="true" expandable="true" headerText="Basic Settings">
+		<ext:InfoHelper  text="{i18n>basicSettingsHelp}"  />
 		<InputListItem label="Clear data and regenerate">
 			<CheckBox selected="{/generateData/clearAndRegenerate}"/>
 		</InputListItem>

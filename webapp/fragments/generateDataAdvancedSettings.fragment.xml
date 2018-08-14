@@ -1,5 +1,6 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core" xmlns:ext="pinaki.ey.CIO.CIOControlPanel.extensions">
 	<Panel id="idGenDataAdvSettingsPanel" expanded="true" expandable="true" headerText="Master Data Maintenance">
+		<ext:InfoHelper  text="{i18n>advancedSettingsHelp}"  />
 		<ext:PanelExtension 
 			title="Cost Center Name(s)"
 			path="/generateData/advancedSettings/costCenter"

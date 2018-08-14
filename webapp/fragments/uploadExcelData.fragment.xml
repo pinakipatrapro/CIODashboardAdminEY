@@ -1,20 +1,20 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml"
-	xmlns:table="sap.ui.table" xmlns:mc="sap.suite.ui.microchart">
+	xmlns:ext="pinaki.ey.CIO.CIOControlPanel.extensions" xmlns:table="sap.ui.table" xmlns:mc="sap.suite.ui.microchart">
 	<Panel id="idUploadExcelData" expanded="true" expandable="true" headerText="Upload Excel Data">
+		<ext:InfoHelper  text="{i18n>help.UploadExcelData}"  />
 		<InputListItem label="Choose target table">
 			<Select items="{path:'idUploadDataModel>/tableList'}" width="25rem" selectedKey="{idUploadDataModel>/selectedTable}">
-				<core:Item text="{idUploadDataModel>name}" key="{idUploadDataModel>tableName}" />
+				<core:Item text="{idUploadDataModel>name}" key="{idUploadDataModel>tableName}"/>
 			</Select>
 		</InputListItem>
 		<InputListItem label="Select source excel workbook">
 			<html:Input type="file" id="fileUploader" width="25rem"/>
 		</InputListItem>
 		<InputListItem label="Select sheet from uploaded workbook" id="idSelectSheetUploadData" visible="false">
-			<Select items="{path:'idUploadDataModel>/uploadedFileSheets'}" change="onSheetSelectionChange"  width="25rem">
+			<Select items="{path:'idUploadDataModel>/uploadedFileSheets'}" change="onSheetSelectionChange" width="25rem">
 				<core:Item text="{idUploadDataModel>name}" key="{idUploadDataModel>name}"/>
 			</Select>
 		</InputListItem>
-		
 		<HeaderContainer id="rawDataQualityHeader" visible="false" scrollStep="200">
 			<TileContent unit="" footer="Total Rows">
 				<content>
@@ -36,13 +36,13 @@
 			</TileContent>
 			<TileContent unit="" footer="Total cells">
 				<content>
-					<NumericContent value="{idUploadDataModel>/uploadedRawDataQuality/totalCount}" 
-						icon="sap-icon://heatmap-chart" size="XS" truncateValueTo="10"/>
+					<NumericContent value="{idUploadDataModel>/uploadedRawDataQuality/totalCount}" icon="sap-icon://heatmap-chart" size="XS"
+						truncateValueTo="10"/>
 				</content>
 			</TileContent>
 			<TileContent unit="" footer="Error %">
 				<content>
-					<mc:RadialMicroChart size="M" percentage="{idUploadDataModel>/uploadedRawDataQuality/nullPerc}" valueColor="Error" class="sapUiSmallMargin" />
+					<mc:RadialMicroChart size="M" percentage="{idUploadDataModel>/uploadedRawDataQuality/nullPerc}" valueColor="Error" class="sapUiSmallMargin"/>
 				</content>
 			</TileContent>
 		</HeaderContainer>

@@ -49,6 +49,10 @@ sap.ui.define([
 		var oHeaderToolbar = new sap.m.OverflowToolbar({
 			content: [
 				new sap.m.ToolbarSpacer(),
+				new sap.m.SearchField({
+					width : '30%',
+					liveChange : [this.searchList, this]
+				}),
 				new sap.m.Button({
 					icon: "sap-icon://add",
 					text: "Add",
@@ -58,7 +62,7 @@ sap.ui.define([
 					icon: "sap-icon://request",
 					text: "Multi Edit",
 					press: [this.openCSVDialog, this]
-				})
+				}),
 			]
 		});
 		oList.setHeaderToolbar(oHeaderToolbar);
@@ -110,6 +114,11 @@ sap.ui.define([
 			name: ""
 		});
 		this.getModel().setProperty(this.getPath(), aPath);
+	};
+	PanelExtension.prototype.searchList = function (oEvent) {
+		var text = oEvent.getParameter('newValue');
+		var listBinding = this.getList().getBinding('items');
+		listBinding.filter([new sap.ui.model.Filter('name', 'Contains',text)]);
 	};
 	PanelExtension.prototype.onBeforeRendering = function () {
 		Panel.prototype.onAfterRendering.apply(this, arguments);

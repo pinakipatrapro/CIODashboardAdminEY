@@ -2,7 +2,6 @@
     font-size: .6rem;
 }
 
-
 .sapMInputBaseInner {
     color: #000000 ! important;
     background: #ffffff00 ! important;
@@ -12,12 +11,14 @@
     font-size: 0.65rem ! important;
 }
 
-.sapUiSizeCompact .sapUiTableCell .sapMLabel, .sapUiSizeCondensed .sapUiTableCell .sapMLabel, .sapUiSizeCompact .sapUiTableColCell>.sapMLabel, .sapUiSizeCondensed .sapUiTableColCell>.sapMLabel {
+.sapUiSizeCompact .sapUiTableCell .sapMLabel,
+.sapUiSizeCondensed .sapUiTableCell .sapMLabel,
+.sapUiSizeCompact .sapUiTableColCell>.sapMLabel,
+.sapUiSizeCondensed .sapUiTableColCell>.sapMLabel {
     font-weight: normal;
     font-size: 0.6rem;
     font-weight: bold;
 }
-
 
 .sapMNCValue {
     font-size: 1rem;
@@ -26,4 +27,19 @@
 .sapMMsgView {
     height: 300px;
     width: 400px;
+}
+
+.noBorder {
+    border: 0px solid #3f5161;
+    margin-bottom: -10px;
+}
+.infoHelper {
+    width: 100%;
+    height: auto;
+    border: 1px solid #3f5161;
+    border-radius: 10px;
+    background: #eff4f9;
+}
+html.sap-desktop .sapUiLoSplitterH.sapUiLoSplitter>.sapUiLoSplitterBar, html.sap-desktop .sapUiLoSplitterH>.sapUiLoSplitterOverlay>.sapUiLoSplitterOverlayBar {
+    width: 0.1rem;
 }

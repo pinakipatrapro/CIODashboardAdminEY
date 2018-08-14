@@ -92,6 +92,20 @@
             "name": "di.code-validation.core_issues.json"
         },
         {
+            "name": "extensions/InfoHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "extensions/InfoHelper.js"
+        },
+        {
+            "name": "extensions/InfoHelperRenderer-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "extensions/InfoHelperRenderer.js"
+        },
+        {
             "name": "extensions/PanelExtension-dbg.js",
             "isDebug": true
         },
@@ -185,6 +199,12 @@
         },
         {
             "name": "tmp/css/style.css"
+        },
+        {
+            "name": "tmp/extensions/InfoHelper.js"
+        },
+        {
+            "name": "tmp/extensions/InfoHelperRenderer.js"
         },
         {
             "name": "tmp/extensions/PanelExtension.js"
@@ -282,6 +302,12 @@
         },
         {
             "name": "tmp-dbg/css/style.css"
+        },
+        {
+            "name": "tmp-dbg/extensions/InfoHelper.js"
+        },
+        {
+            "name": "tmp-dbg/extensions/InfoHelperRenderer.js"
         },
         {
             "name": "tmp-dbg/extensions/PanelExtension.js"
