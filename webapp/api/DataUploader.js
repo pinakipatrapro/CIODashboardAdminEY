@@ -64,6 +64,9 @@ sap.ui.define([
 							if (typeof (value) == "string") {
 								value = "'" + value + "'";
 							}
+							if(!value){
+								value = "\'\'";
+							}
 							aValues.push(value);
 						}.bind(this));
 						var sqlText = 'insert into "' + this._tempPersistance + '"  ' + this._columnSequence + 'values (' + aValues.join(',') + ' ) ';
