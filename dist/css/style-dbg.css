@@ -40,4 +40,6 @@
     border-radius: 10px;
     background: #eff4f9;
 }
-
+html.sap-desktop .sapUiLoSplitterH.sapUiLoSplitter>.sapUiLoSplitterBar, html.sap-desktop .sapUiLoSplitterH>.sapUiLoSplitterOverlay>.sapUiLoSplitterOverlayBar {
+    width: 0.1rem;
+}

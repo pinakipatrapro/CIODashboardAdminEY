@@ -145,6 +145,11 @@
             "raw": "i18n/i18n.properties"
         },
         {
+            "name": "i18n/i18n_de.properties",
+            "raw": "i18n/i18n.properties",
+            "locale": "_de"
+        },
+        {
             "name": "index.html"
         },
         {
@@ -236,6 +241,11 @@
         {
             "name": "tmp/i18n/i18n.properties",
             "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "tmp/i18n/i18n_de.properties",
+            "raw": "i18n/i18n.properties",
+            "locale": "_de"
         },
         {
             "name": "tmp/index.html"

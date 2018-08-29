@@ -74,7 +74,7 @@ sap.ui.define([
 						});
 					}
 				} else if (datatype == "DATE") {
-					if (isNaN(Date.parse(new Date(e.substring(0, 4) + '-' + e.substring(4, 6) + '-' + e.substring(6, 8))))) {
+					if (isNaN(Date.parse(new Date(e.substring(0, 4) + '-' + e.substring(4, 6) + '-' + e.substring(6, 8))) || Date.parse(e))) {
 						this._messages.push({
 							text: 'Data type mismatch',
 							description: 'Data type mismatch Expected :' + datatype +
