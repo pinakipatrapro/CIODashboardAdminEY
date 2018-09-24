@@ -1,9 +1,10 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml"
 	xmlns:ext="pinaki.ey.CIO.CIOControlPanel.extensions" xmlns:table="sap.ui.table" xmlns:mc="sap.suite.ui.microchart">
 	<Panel id="idUploadExcelData" expanded="true" expandable="true" headerText="Upload Excel Data">
-		<ext:InfoHelper  text="{i18n>help.UploadExcelData}"  />
+		<ext:InfoHelper text="{i18n>help.UploadExcelData}"/>
 		<InputListItem label="Choose target table">
-			<Select items="{path:'idUploadDataModel>/tableList'}" width="25rem" selectedKey="{idUploadDataModel>/selectedTable}">
+			<Select items="{path:'idUploadDataModel>/tableList'}" width="25rem" selectedKey="{idUploadDataModel>/selectedTable}"
+				change="onTableSelectionChange">
 				<core:Item text="{idUploadDataModel>name}" key="{idUploadDataModel>tableName}"/>
 			</Select>
 		</InputListItem>

@@ -92,5 +92,12 @@ sap.ui.define([
 			this.getView().getModel().setProperty('/selectedTableTechnicalName',this.getView().getModel('idUploadDataModel').getProperty('/selectedTable'));
 			oRouter.navTo("DataUploadMapping");
 		},
+		onTableSelectionChange : function(oEvent){
+			var warning = oEvent.getParameter('selectedItem').getBindingContext('idUploadDataModel').getProperty('WarningInfo');
+			if(!!warning){
+				warning = warning + ' Please procees with caution';
+				MessageBox.warning(warning);
+			}
+		}
 	});
 });

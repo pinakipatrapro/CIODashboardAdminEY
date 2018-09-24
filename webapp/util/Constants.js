@@ -1,5 +1,6 @@
 sap.ui.define([], function () {
 	"use strict";
+	var warningInfo = "Changes made to this table will be directly reflecting in the Dashboard / Allocation app \n even without using the Load Data functionality.";
 	return {
 		tableList: [
         {
@@ -53,6 +54,22 @@ sap.ui.define([], function () {
         {
             "name": "Chart Of Accounts",
             "tableName": '"CIO"."CIO.DataUploader.DB.Tables::ChartOfAccounts"'
+        },
+        //Directly Upload to Dashboard Tables
+        {
+            "name": "IT Services - Master Data",
+            "tableName": '"CIO"."CIO.Dashboard.DB.Tables::ITServices"',
+            "WarningInfo":warningInfo
+        },
+        {
+            "name": "Business Services - Master Data",
+            "tableName": '"CIO"."CIO.Dashboard.DB.Tables::BusinessServices"',
+            "WarningInfo":warningInfo
+        },
+        {
+            "name": "Business - Master Data",
+            "tableName": '"CIO"."CIO.Dashboard.DB.Tables::Business"',
+            "WarningInfo":warningInfo
         }
     ]
 	};
